@@ -1,0 +1,173 @@
+-----to create Database------
+CREATE DATABASE My_organization
+
+-------To create A table--------
+CREATE TABLE Employee(
+EmpID int PRIMARY KEY,
+EmpName VARCHAR(50),
+Email VARCHAR(50)UNIQUE,
+Gender VARCHAR(6),
+Contact int,
+Address VARCHAR(50),
+);
+
+-----To Insert the values in the table------
+INSERT INTO Employee (EmpID, EmpName, Email, Gender, Contact, Address, Salary, Age)
+VALUES (Column1, Column2, 'Column3, Column4, Column5, Column6,Column7,Column8);
+***Note String is us by('').
+
+------to search by specific Alphabets------
+for example 'm'
+SELECT * FROM Employee WHERE Gender LIKE 'M%';
+select *from Employee WHERE	EmpName LIKE '%M%'; contain M letter
+select *from Employee WHERE	EmpName LIKE '%M'; Ends with letter M
+select *from Employee WHERE	EmpName LIKE '%'+@empname+'%' and EmpID= @empid
+
+-----UPDate query-----
+UPDATE Employee
+SET Email= 'john@yahoo.com'
+WHERE EmpID=1;
+RND reasearch and development
+
+----Update Multiple records-----
+UPDATE Employee
+SET EmpName = CASE EmpID
+                WHEN 1 THEN 'john'
+                WHEN 2 THEN 'Mark'
+                WHEN 3 THEN 'Peter'
+                WHEN 4 THEN 'Lilly'
+	        WHEN 5 THEN 'Ahmed'
+		WHEN 6 THEN 'Pervez'
+		WHEN 7 THEN 'Leena'
+		WHEN 8 THEN 'Jay'
+		WHEN 9 THEN 'Mahi'
+		WHEN 10THEN 'Sam'
+             END
+WHERE EmpID IN (1, 2, 3,4,5,6,7,8,9,10);
+
+-----Stored Procedure----------
+create procedure EmpData
+AS
+Begin 
+Select * from Employee
+end
+--to ckeck--
+EXEC EmpData
+
+----To delete the table----
+DROP TABLE Employee
+
+----finding Depid null--------
+select* from tbl_emp 
+where Depid is nUll
+
+
+---using where by filter not in-----
+select top(1)  *from tbl_emp
+where empid not in (select top (4) Empid from tbl_emp order by empsal desc)
+order by  empsal desc
+
+---Addition(dding) salary column by 10------
+select EmpName,Salary, Salary+10 as after
+From Employee;
+---Substraction(minus) salary column by 10------
+select EmpName,Salary, Salary-10 as after
+From Employee;
+---multiplying salary column by 10------
+select EmpName,Salary, Salary*10 as after
+From Employee;
+---Dividing salary column by 10------
+select EmpName,Salary, Salary/10 as after
+From Employee;
+
+aggregate functions like COUNT, SUM, AVG, MAX, or MIN 
+
+
+select empname as 'name',empgender as 'gender',empsal as 'sal',depid from tbl_emp 
+where Depid is nUll and Empgender='m'
+order by name asc ,Empsal asc
+
+
+select top(1)with ties * from tbl_emp
+order by Empsal desc
+
+select top(1) * from tbl_emp
+where Empid <> 1035
+order by Empsal desc
+
+select top(1) * from tbl_emp
+where Empid not in(1035)
+order by Empsal desc
+
+select top(1) * from tbl_emp
+where Empid not in(select top(1) empid from tbl_emp order by Empsal desc)
+order by Empsal desc
+
+top3rd sal
+Select top(1)* from tbl_emp
+where empid not in (select top(2) empid from tbl_emp order by Empsal desc)
+order by Empsal desc 
+
+
+
+
+
+
+select top(1)  *from tbl_emp
+where empid not in (select top (4) Empid from tbl_emp order by empsal desc)
+order by  empsal desc
+
+
+select* from tbl_emp
+order by empsal desc
+
+
+
+
+select *from tbl_emp
+where empgender='F'
+
+
+select *from tbl_emp
+where empname like 'm%'
+ 
+ select *from tbl_emp
+ where empgender='M'
+ order by empname asc
+
+ select empname as name, empgender as gender ,empsal as salary,empid
+ from tbl_emp
+ order by empsal des
+
+ select * from tbl_emp 
+where Depid is not nUll and Empgender='F'
+
+select * from tbl_emp
+where empgender='F'and empcontact like '9%'
+
+select * from tbl_emp
+
+select * from tbl_emp
+where Depid=100 
+
+
+select * from tbl_emp
+where empgender = 'F' and empsal>50000
+
+select * from tbl_emp
+select Empid,count(*) as ordercount
+from tbl_emp
+group by Empid
+
+SELECT depid, SUM(Empsal) AS TotalSalary
+FROM tbl_emp
+GROUP BY depid;
+
+
+
+
+
+
+
+
+
